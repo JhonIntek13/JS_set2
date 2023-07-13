@@ -1,5 +1,5 @@
 // A. Date format <Month-string> <##day>, <####year>
-const regexA = /^[a-zA-Z]+ \d{1,2}, \d{4}$/;
+const regexA = /^(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}$/;
 const stringA = "September 29, 1972";
 console.log(regexA.test(stringA));
 

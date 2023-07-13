@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Replace Word with Hashtag</title>
+  <style>
+    #text-container {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="text-container">
+    <input type="text" id="replace-input" placeholder="Enter word to replace">
+    <button onclick="replaceWord()">Replace</button>
+  </div>
+  <div id="output-container">
+    <p id="output-text">You should never use yolo for any reason...</p>
+  </div>
+
+  <script>
+    function replaceWord() {
+      var replaceInput = document.getElementById('replace-input');
+      var replaceText = replaceInput.value.trim();
+      if (replaceText !== "") {
+        var outputText = document.getElementById('output-text');
+        var replacedText = replaceWithHashtag(outputText.innerText, replaceText);
+        outputText.innerHTML = replacedText;
+      }
+      replaceInput.value = "";
+    }
+
+    function replaceWithHashtag(text, userString) {
+      var replacedText = text.replace(new RegExp("\\b" + userString + "\\b", "gi"), function(match) {
+        var hashtag = "#" + match;
+        var twitterSearchLink = "https://twitter.com/search?q=" + encodeURIComponent(hashtag);
+        return '<a href="' + twitterSearchLink + '">' + hashtag + '</a>';
+      });
+      return replacedText;
+    }
+  </script>
+</body>
+</html>
