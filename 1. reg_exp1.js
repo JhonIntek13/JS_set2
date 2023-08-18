@@ -2,8 +2,8 @@
 var regexA = /.abc/;
 var stringA = "xabc";
 
-const regexB = /^a+b!!1\{4\}/;
-const stringB = "aaaab!!1{4}";
+const regexB = /a+b?!!1{4}/;
+const stringB = "ab!!1111";
 
 var regexC = /.{3}a\.b/;
 var stringC = "xyz.a.b";
@@ -29,8 +29,8 @@ var stringI = "abc";
 var regexJ = /[a-zA-Z_\$\.]+[A-Za-z_\$0-9\.]*@[a-zA-Z_\$\.]+[a-zA-Z_\$0-9\.]*\.(com|net|org){1}/;
     var stringJ = "example_email123@domain.com";
 
-var regexK = /\(N _ N\)/;
-var stringK = "(N _ N)";
+var regexK = /\([0oOn]{1}(_|\s)[0oOn]{1}\)/;
+var stringK = "(0_o)";
 
 // Test
 console.log(regexA.test(stringA));

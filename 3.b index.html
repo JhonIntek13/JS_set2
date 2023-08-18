@@ -30,7 +30,8 @@
     }
 
     function replaceWithHashtag(text, userString) {
-      var replacedText = text.replace(new RegExp("\\b" + userString + "\\b", "gi"), function(match) {
+      var sanitizedUserString = userString.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var replacedText = text.replace(new RegExp("\\b" + sanitizedUserString + "\\b", "gi"), function(match) {
         var hashtag = "#" + match;
         var twitterSearchLink = "https://twitter.com/search?q=" + encodeURIComponent(hashtag);
         return '<a href="' + twitterSearchLink + '">' + hashtag + '</a>';
