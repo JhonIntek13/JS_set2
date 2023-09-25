@@ -18,13 +18,25 @@
   </div>
 
   <script>
+    var originalText = "You should never use yolo for any reason...";
+
     function replaceWord() {
       var replaceInput = document.getElementById('replace-input');
       var replaceText = replaceInput.value.trim();
       if (replaceText !== "") {
         var outputText = document.getElementById('output-text');
-        var replacedText = replaceWithHashtag(outputText.innerText, replaceText);
-        outputText.innerHTML = replacedText;
+        var replacedWords = outputText.getAttribute('data-replaced-words');
+        if (!replacedWords || replacedWords.indexOf(replaceText) === -1) {
+          var currentText = originalText;
+          if (replacedWords) {
+            currentText = outputText.innerHTML;
+          }
+          var replacedText = replaceWithHashtag(currentText, replaceText);
+          outputText.innerHTML = replacedText;
+          // Update the list of replaced words
+          var updatedWords = (replacedWords || '') + ' ' + replaceText;
+          outputText.setAttribute('data-replaced-words', updatedWords);
+        }
       }
       replaceInput.value = "";
     }
