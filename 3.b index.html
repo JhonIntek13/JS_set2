@@ -46,10 +46,22 @@
       var replacedText = text.replace(new RegExp("\\b" + sanitizedUserString + "\\b", "gi"), function(match) {
         var hashtag = "#" + match;
         var twitterSearchLink = "https://twitter.com/search?q=" + encodeURIComponent(hashtag);
-        return '<a href="' + twitterSearchLink + '">' + hashtag + '</a>';
+        
+        // Ensure the replacement is not applied within HTML tags or URLs
+        var replacement = '<a href="' + twitterSearchLink + '">' + hashtag + '</a>';
+        return isInsideHTMLTagOrURL(match, text) ? match : replacement;
       });
       return replacedText;
     }
+    
+    function isInsideHTMLTagOrURL(match, text) {
+      var regex = /<[^>]+>|https?:\/\/\S+/gi; 
+      var matches = text.match(regex);
+      return matches && matches.some(function (str) {
+        return str.includes(match);
+      });
+    }
+    
   </script>
 </body>
 </html>
